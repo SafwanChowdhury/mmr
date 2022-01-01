@@ -2,10 +2,11 @@ package com.mmr;
 
 
 import java.util.Arrays;
-
+import java.util.Scanner;
 
 public class mmr {
     public static String output;
+
     public static int[] mmr(int[] array) {
         int result = 1000;
         int[] ideal = new int[0];
@@ -31,29 +32,31 @@ public class mmr {
         }
         return ideal;
     }
-        public static int[] mmru ( int[] array) {
-            int result = 1000;
-            int[] ideal = new int[0];
-            int closestResult = 100;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    for (int k = 0; k < 3; k++) {
-                            result = 100 - array[i] - array[j] - array[k];
-                            if (result == 0) {
-                                ideal = new int[]{array[i], array[j], array[k]};
-                                return ideal;
-                            } else {
-                                if (result < closestResult && result > 0) {
-                                    ideal = new int[]{array[i], array[j], array[k]};
-                                    closestResult = result;
-                                }
-                            }
 
+    public static int[] mmru(int[] array) {
+        int result = 1000;
+        int[] ideal = new int[0];
+        int closestResult = 100;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    result = 100 - array[i] - array[j] - array[k];
+                    if (result == 0) {
+                        ideal = new int[]{array[i], array[j], array[k]};
+                        return ideal;
+                    } else {
+                        if (result < closestResult && result > 0) {
+                            ideal = new int[]{array[i], array[j], array[k]};
+                            closestResult = result;
+                        }
                     }
+
                 }
             }
-            return ideal;
         }
+        return ideal;
+    }
+
     public static int[] mmrh12(int[] array) {
         int result = 1000;
         int[] ideal = new int[0];
@@ -94,7 +97,8 @@ public class mmr {
         }
         return ideal;
     }
-    public static int[] mmrh10 ( int[] array) {
+
+    public static int[] mmrh10(int[] array) {
         int result = 1000;
         int[] ideal = new int[0];
         int closestResult = 100;
@@ -108,16 +112,15 @@ public class mmr {
                                     for (int p = 0; p < 3; p++) {
                                         for (int q = 0; q < 3; q++) {
                                             for (int r = 0; r < 3; r++) {
-                                                        result = 100 - array[i] - array[j] - array[k] - array[l] - array[m] - array[n] - array[o] - array[p] - array[q] - array[r];
-                                                        if (result == 0) {
-                                                            ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p], array[q], array[r]};
-                                                            return ideal;
-                                                        }
-                                                        else {
-                                                            if (result < closestResult && result > 0) {
-                                                                ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p], array[q], array[r]};
-                                                                closestResult = result;
-                                                            }
+                                                result = 100 - array[i] - array[j] - array[k] - array[l] - array[m] - array[n] - array[o] - array[p] - array[q] - array[r];
+                                                if (result == 0) {
+                                                    ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p], array[q], array[r]};
+                                                    return ideal;
+                                                } else {
+                                                    if (result < closestResult && result > 0) {
+                                                        ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p], array[q], array[r]};
+                                                        closestResult = result;
+                                                    }
                                                 }
                                             }
                                         }
@@ -131,7 +134,8 @@ public class mmr {
         }
         return ideal;
     }
-    public static int[] mmrh8 ( int[] array) {
+
+    public static int[] mmrh8(int[] array) {
         int result = 1000;
         int[] ideal = new int[0];
         int closestResult = 100;
@@ -143,16 +147,15 @@ public class mmr {
                             for (int n = 0; n < 3; n++) {
                                 for (int o = 0; o < 3; o++) {
                                     for (int p = 0; p < 3; p++) {
-                                                result = 100 - array[i] - array[j] - array[k] - array[l] - array[m] - array[n] - array[o] - array[p];
-                                                if (result == 0) {
-                                                    ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p]};
-                                                    return ideal;
-                                                }
-                                                else {
-                                                    if (result < closestResult && result > 0) {
-                                                        ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p]};
-                                                        closestResult = result;
-                                                    }
+                                        result = 100 - array[i] - array[j] - array[k] - array[l] - array[m] - array[n] - array[o] - array[p];
+                                        if (result == 0) {
+                                            ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p]};
+                                            return ideal;
+                                        } else {
+                                            if (result < closestResult && result > 0) {
+                                                ideal = new int[]{array[i], array[j], array[k], array[l], array[m], array[n], array[o], array[p]};
+                                                closestResult = result;
+                                            }
                                         }
                                     }
                                 }
@@ -166,29 +169,58 @@ public class mmr {
     }
 
 
-        public static void main (String[]args) {
-            int[] arr = new int[3];
-            int laps;
-            String sh = App.compound;
-            arr[0] = App.It1;
-            arr[1] = App.It2;
-            arr[2] = App.It3;
-            if (sh.equals("Soft")) {
-                if (App.Undercut) {
-                    output = Arrays.toString(mmr(arr));
+    public static void main(String[] args) {
+        int[] arr = new int[3];
+        Scanner input = new Scanner(System.in);
+        int laps;
+        while (true) {
+            System.out.println("Driver?");
+            String driver = input.nextLine();
+            System.out.println("Soft or Hard? (s,h)");
+            String sh = input.nextLine();
+            System.out.println("Enter Tire Wear Data");
+            System.out.println("T1:");
+            arr[0] = input.nextInt();
+            System.out.println("T2:");
+            arr[1] = input.nextInt();
+            System.out.println("T3:");
+            arr[2] = input.nextInt();
+            String g = input.nextLine();
+            if (sh.equals("s")) {
+                System.out.println("Undercut? (t,f)");
+                String uc = input.nextLine();
+                if (uc.equals("t")) {
+                    System.out.println(driver);
+                    System.out.println(Arrays.toString(mmr(arr)));
+                } else if (uc.equals("f")) {
+                    System.out.println(driver);
+                    System.out.println(Arrays.toString(mmru(arr)));
                 } else {
-                    output = Arrays.toString(mmru(arr));
+                    g = input.nextLine();
+                    continue;
                 }
-            } else if (sh.equals("Hard")) {
-                laps = App.laps1;
-                if (laps == 0) {
-                    output = Arrays.toString(mmrh8(arr));
-                } else if (laps == 1) {
-                    output = Arrays.toString(mmrh10(arr));
-                } else if (laps == 2) {
-                    output = Arrays.toString(mmrh12(arr));
+            } else if (sh.equals("h")) {
+                System.out.println("Laps 8,10,12:");
+                laps = input.nextInt();
+                if (laps == 8) {
+                    System.out.println(driver);
+                    System.out.println(Arrays.toString(mmrh8(arr)));
+                } else if (laps == 10) {
+                    System.out.println(driver);
+                    System.out.println(Arrays.toString(mmrh10(arr)));
+                } else if (laps == 12) {
+                    System.out.println(driver);
+                    System.out.println(Arrays.toString(mmrh12(arr)));
+                } else {
+                    g = input.nextLine();
+                    continue;
                 }
+            } else {
+                g = input.nextLine();
+                continue;
             }
+            g = input.nextLine();
         }
 
     }
+}
