@@ -3,6 +3,7 @@ package com.mmr;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class App {
     private JButton button1;
@@ -30,7 +31,30 @@ public class App {
                 laps1 = lapsCombo.getSelectedIndex();
                 compound = (String) comboBox1.getSelectedItem();
                 Undercut = undercutCheckBox.isSelected();
-                String stringObject = driverT.getText() + " - " + compound;
+                int[] arr = new int[3];
+                int laps;
+                String sh = compound;
+                arr[0] = It1;
+                arr[1] = It2;
+                arr[2] = It3;
+                String output = new String();
+                if (sh.equals("Soft")) {
+                    if (Undercut) {
+                        output = Arrays.toString(mmr.mmr(arr));
+                    } else {
+                        output = Arrays.toString(mmr.mmru(arr));
+                    }
+                } else if (sh.equals("Hard")) {
+                    laps = laps1;
+                    if (laps == 0) {
+                        output = Arrays.toString(mmr.mmrh8(arr));
+                    } else if (laps == 1) {
+                        output = Arrays.toString(mmr.mmrh10(arr));
+                    } else if (laps == 2) {
+                        output = Arrays.toString(mmr.mmrh12(arr));
+                    }
+                }
+                String stringObject = driverT.getText() + " - " + compound + ": " + output;
                 JOptionPane.showMessageDialog(null, stringObject);
             }
         });

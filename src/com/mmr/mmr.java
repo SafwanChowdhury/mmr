@@ -1,11 +1,11 @@
-import com.mmr.App;
+package com.mmr;
+
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 
-class mmr {
-
+public class mmr {
+    public static String output;
     public static int[] mmr(int[] array) {
         int result = 1000;
         int[] ideal = new int[0];
@@ -166,65 +166,28 @@ class mmr {
     }
 
 
-        public static void main (String[]args)
-        {
+        public static void main (String[]args) {
             int[] arr = new int[3];
-            Scanner input = new Scanner(System.in);
             int laps;
-            while(true) {
-                System.out.println("Driver?");
-                String driver = input.nextLine();
-                System.out.println("Soft or Hard? (s,h)");
-                String sh = input.nextLine();
-                System.out.println("Enter Tire Wear Data");
-                System.out.println("T1:");
-                arr[0] = input.nextInt();
-                System.out.println("T2:");
-                arr[1] = input.nextInt();
-                System.out.println("T3:");
-                arr[2] = input.nextInt();
-                String g = input.nextLine();
-                if (sh.equals("s")) {
-                    System.out.println("Undercut? (t,f)");
-                    String uc = input.nextLine();
-                    if (uc.equals("t")) {
-                        System.out.println(driver);
-                        System.out.println(Arrays.toString(mmr(arr)));
-                    }
-                    else if (uc.equals("f")) {
-                        System.out.println(driver);
-                        System.out.println(Arrays.toString(mmru(arr)));
-                    }
-                    else {
-                        g = input.nextLine();
-                        continue;
-                    }
+            String sh = App.compound;
+            arr[0] = App.It1;
+            arr[1] = App.It2;
+            arr[2] = App.It3;
+            if (sh.equals("Soft")) {
+                if (App.Undercut) {
+                    output = Arrays.toString(mmr(arr));
+                } else {
+                    output = Arrays.toString(mmru(arr));
                 }
-                else if (sh.equals("h")){
-                    System.out.println("Laps 8,10,12:");
-                    laps = input.nextInt();
-                    if (laps == 8) {
-                        System.out.println(driver);
-                        System.out.println(Arrays.toString(mmrh8(arr)));
-                    }
-                    else if (laps == 10) {
-                        System.out.println(driver);
-                        System.out.println(Arrays.toString(mmrh10(arr)));
-                    }
-                    else if (laps == 12) {
-                        System.out.println(driver);
-                        System.out.println(Arrays.toString(mmrh12(arr)));
-                    }
-                    else {
-                        g = input.nextLine();
-                        continue;
-                    }
+            } else if (sh.equals("Hard")) {
+                laps = App.laps1;
+                if (laps == 0) {
+                    output = Arrays.toString(mmrh8(arr));
+                } else if (laps == 1) {
+                    output = Arrays.toString(mmrh10(arr));
+                } else if (laps == 2) {
+                    output = Arrays.toString(mmrh12(arr));
                 }
-                else {
-                    g = input.nextLine();
-                    continue;
-                }
-                g = input.nextLine();
             }
         }
 
