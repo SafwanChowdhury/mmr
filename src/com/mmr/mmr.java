@@ -168,59 +168,112 @@ public class mmr {
         return ideal;
     }
 
+    public static int[] mmrnew(int[] array, int laps){
+        // the length of the input array
+        int base = 3;
+        int result = 1000;
+        int closestResult = 100;
+        // must have same length as desired result length
+        int[] indexArray = new int[laps];
+        int[] tempArray = new int[laps];
+        int[] idealArray = new int[laps];
+        // there are base to the power of length possible combinations
+        for (int counter = 0; counter < Math.pow(base, indexArray.length); counter++) {
+            // retrieve digits as in linked answer
+            int counterCopy = counter;
+            int sum = 0;
+            for (int i = 0; i < indexArray.length; i++) {
+                indexArray[i] = counterCopy % base;
+                counterCopy /= base;
+                if (indexArray[i] == 0){
+                    tempArray[i] = array[0];
+                }
+                else if (indexArray[i] == 1){
+                    tempArray[i] = array[1];
+                }
+                else if (indexArray[i] == 2){
+                    tempArray[i] = array[2];
+                }
+                sum += tempArray[i];
+                result = 100 - sum;
+            }
+            if (result == 0){
+                for (int i = 0; i < indexArray.length; i++){
+                    idealArray[i] = tempArray[i];
+                }
+                return idealArray;
+            }
+            else{
+                if (result < closestResult && result > 0) {
+                    for (int i = 0; i < indexArray.length; i++){
+                        idealArray[i] = tempArray[i];
+                    }
+                    closestResult = result;
+                }
+            }
+
+
+        }
+        return idealArray;
+    }
 
     public static void main(String[] args) {
         int[] arr = new int[3];
         Scanner input = new Scanner(System.in);
         int laps;
-        while (true) {
-            System.out.println("Driver?");
-            String driver = input.nextLine();
-            System.out.println("Soft or Hard? (s,h)");
-            String sh = input.nextLine();
-            System.out.println("Enter Tire Wear Data");
-            System.out.println("T1:");
-            arr[0] = input.nextInt();
-            System.out.println("T2:");
-            arr[1] = input.nextInt();
-            System.out.println("T3:");
-            arr[2] = input.nextInt();
-            String g = input.nextLine();
-            if (sh.equals("s")) {
-                System.out.println("Undercut? (t,f)");
-                String uc = input.nextLine();
-                if (uc.equals("t")) {
-                    System.out.println(driver);
-                    System.out.println(Arrays.toString(mmr(arr)));
-                } else if (uc.equals("f")) {
-                    System.out.println(driver);
-                    System.out.println(Arrays.toString(mmru(arr)));
-                } else {
-                    g = input.nextLine();
-                    continue;
-                }
-            } else if (sh.equals("h")) {
-                System.out.println("Laps 8,10,12:");
-                laps = input.nextInt();
-                if (laps == 8) {
-                    System.out.println(driver);
-                    System.out.println(Arrays.toString(mmrh8(arr)));
-                } else if (laps == 10) {
-                    System.out.println(driver);
-                    System.out.println(Arrays.toString(mmrh10(arr)));
-                } else if (laps == 12) {
-                    System.out.println(driver);
-                    System.out.println(Arrays.toString(mmrh12(arr)));
-                } else {
-                    g = input.nextLine();
-                    continue;
-                }
-            } else {
-                g = input.nextLine();
-                continue;
-            }
-            g = input.nextLine();
-        }
+        arr[0] = 8;
+        arr[1] = 13;
+        arr[2] = 15;
+        laps = 12;
+        System.out.println(Arrays.toString(mmrnew(arr, laps)));
+//        while (true) {
+//            System.out.println("Driver?");
+//            String driver = input.nextLine();
+//            System.out.println("Soft or Hard? (s,h)");
+//            String sh = input.nextLine();
+//            System.out.println("Enter Tire Wear Data");
+//            System.out.println("T1:");
+//            arr[0] = input.nextInt();
+//            System.out.println("T2:");
+//            arr[1] = input.nextInt();
+//            System.out.println("T3:");
+//            arr[2] = input.nextInt();
+//            String g = input.nextLine();
+//            if (sh.equals("s")) {
+//                System.out.println("Undercut? (t,f)");
+//                String uc = input.nextLine();
+//                if (uc.equals("t")) {
+//                    System.out.println(driver);
+//                    System.out.println(Arrays.toString(mmr(arr)));
+//                } else if (uc.equals("f")) {
+//                    System.out.println(driver);
+//                    System.out.println(Arrays.toString(mmru(arr)));
+//                } else {
+//                    g = input.nextLine();
+//                    continue;
+//                }
+//            } else if (sh.equals("h")) {
+//                System.out.println("Laps 8,10,12:");
+//                laps = input.nextInt();
+//                if (laps == 8) {
+//                    System.out.println(driver);
+//                    System.out.println(Arrays.toString(mmrh8(arr)));
+//                } else if (laps == 10) {
+//                    System.out.println(driver);
+//                    System.out.println(Arrays.toString(mmrh10(arr)));
+//                } else if (laps == 12) {
+//                    System.out.println(driver);
+//                    System.out.println(Arrays.toString(mmrh12(arr)));
+//                } else {
+//                    g = input.nextLine();
+//                    continue;
+//                }
+//            } else {
+//                g = input.nextLine();
+//                continue;
+//            }
+//            g = input.nextLine();
+//        }
 
     }
 }
